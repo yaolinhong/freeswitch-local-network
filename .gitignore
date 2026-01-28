@@ -26,6 +26,6 @@ dist-ssr
 
 # Media files (recordings, demos, videos)
 api/public/recordings/*
-demo/*.mp4
+demo/*.zip.mp4
 *.wav
 !public/ringtone.wav
