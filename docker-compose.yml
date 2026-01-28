@@ -1,0 +1,64 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: voip-postgres
+    environment:
+      POSTGRES_DB: voip_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - voip-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  freeswitch:
+    image: safarov/freeswitch:latest
+    container_name: voip-freeswitch
+    ports:
+      - "5060:5060/udp"
+      - "5060:5060/tcp"
+      - "5080:5080/udp"
+      - "5080:5080/tcp"
+      - "8081:8081"
+      - "8021:8021"
+      - "7443:7443"
+      - "5066:5066"
+      - "6050:6050/udp"
+      - "6050:6050/tcp"
+      - "16384-16400:16384-16400/udp"
+    volumes:
+      - ./freeswitch/conf:/etc/freeswitch
+      - ./api/public/recordings:/recordings
+    networks:
+      - voip-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  nginx:
+    image: nginx:alpine
+    container_name: voip-nginx
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./nginx_proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx_proxy/certs:/etc/nginx/certs:ro
+    networks:
+      - voip-network
+    depends_on:
+      - freeswitch
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  voip-network:
+    driver: bridge

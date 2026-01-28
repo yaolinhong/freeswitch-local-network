@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  username      String   @unique @db.VarChar(50)
+  passwordHash  String   @map("password_hash") @db.VarChar(255)
+  email         String   @unique @db.VarChar(255)
+  extension     String   @unique @db.VarChar(10)
+  displayName   String   @map("display_name") @db.VarChar(100)
+  status        String   @default("offline") @db.VarChar(20)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  
+  callsMade       Call[] @relation("CallerCalls")
+  callsReceived   Call[] @relation("CalleeCalls")
+  
+  @@map("users")
+}
+
+model Call {
+  id         String    @id @default(uuid())
+  callerId   String    @map("caller_id")
+  calleeId   String    @map("callee_id")
+  callType   String    @default("voice") @map("call_type") @db.VarChar(20)
+  startTime  DateTime  @default(now()) @map("start_time")
+  endTime    DateTime? @map("end_time")
+  duration   Int       @default(0)
+  status     String    @default("initiated") @db.VarChar(20)
+  sipCallId  String?   @map("sip_call_id") @db.VarChar(255)
+  recordingUrl String?   @map("recording_url") @db.VarChar(255)
+  createdAt  DateTime  @default(now()) @map("created_at")
+  
+  caller     User      @relation("CallerCalls", fields: [callerId], references: [id])
+  callee     User      @relation("CalleeCalls", fields: [calleeId], references: [id])
+  
+  @@map("calls")
+}
