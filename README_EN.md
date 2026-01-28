@@ -28,19 +28,19 @@ A Local Area Network (LAN) VoIP communication system based on FreeSWITCH, suppor
 
 <table>
   <tr>
-    <th width="33%">Full Demo</th>
-    <th width="33%">Quick Preview</th>
+    <th width="33%">Compressed</th>
+    <th width="33%">1080p</th>
     <th width="33%">System Screenshot</th>
   </tr>
   <tr>
     <td>
-      <video src="./demo/freeswitch-localnetwork-demo.mp4" controls width="100%"></video>
+      <video src="https://github.com/user-attachments/assets/d4c81d84-a13d-4d04-9514-69247da236bd" controls width="100%"></video>
     </td>
     <td>
-      <video src="./demo/freeswitch-localnetwork-demo-zip.mp4" controls width="100%"></video>
+      <video src="https://github.com/user-attachments/assets/b8c7b16f-5d40-42c2-befc-54bc973cef40" controls width="100%"></video>
     </td>
     <td>
-      <img src="./demo/voip.png" alt="System Interface Preview" width="100%">
+      <img src="./demo/voip.png" alt="系统界面预览" width="100%">
     </td>
   </tr>
 </table>

@@ -19,16 +19,16 @@
 
 <table>
   <tr>
-    <th width="33%">完整演示</th>
-    <th width="33%">快速预览</th>
+    <th width="33%">压缩</th>
+    <th width="33%">1080p</th>
     <th width="33%">系统截图</th>
   </tr>
   <tr>
     <td>
-      <video src="./demo/freeswitch-localnetwork-demo.mp4" controls width="100%"></video>
+      <video src="https://github.com/user-attachments/assets/d4c81d84-a13d-4d04-9514-69247da236bd" controls width="100%"></video>
     </td>
     <td>
-      <video src="./demo/freeswitch-localnetwork-demo-zip.mp4" controls width="100%"></video>
+      <video src="https://github.com/user-attachments/assets/b8c7b16f-5d40-42c2-befc-54bc973cef40" controls width="100%"></video>
     </td>
     <td>
       <img src="./demo/voip.png" alt="系统界面预览" width="100%">
